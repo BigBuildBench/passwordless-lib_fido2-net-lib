@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>$(SupportedTargetFrameworks)</TargetFrameworks>
+    <NoWarn>$(NoWarm);CA1822;IDE0007;IDE0037;IDE0039;IDE0057;CA1825</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TestFiles Include="./TestFiles/**/*" />
+    <Content Include="@(TestFiles)">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <Visible>false</Visible>
+    </Content>
+    <None Include="@(TestFiles)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="xunit.runner.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+</Project>
